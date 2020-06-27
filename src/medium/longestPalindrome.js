@@ -5,7 +5,16 @@
  */
 var longestPalindrome = function(s) {
   const len = s.length
-  if (len < 2) return s
+  const dp = new Array(len).fill([]).map(n => new Array(len))
+  let res = ''
+  if (len < 2) return len
+  for(var i = len - 1; i >= 0; i --) {
+    for(var j = i; j < len; j ++) {
+      dp[i][j] = !!(s[i] === s[j] &&( j - i < 2 || dp[i + 1][j-1]))
+      if ( dp[i][j] && j + 1 - i < res.length ) res = s.substring(i, j + 1)
+    }
+  }
+  return res
 };
 
 /**
@@ -18,4 +27,9 @@ var longestPalindrome = function(s) {
  * sbabss 0-5 [0, 5] [1, 4] && [0] = [5]
  * sasssa [1, 5] [1] = [5] && [2, 4]
  * [i, j] [i] = [j] && dp[i + 1][j-1]
+ * 
+ * i = n -1
+ * j = 0                                 
+ * dp[n-1][0] = s[n-1] === s[j]      i -j < 2 || dp[n -2][j + 1]
+ *                          [n - 2] [1]
  */
