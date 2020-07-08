@@ -8,14 +8,12 @@ var lengthOfLIS = function(nums) {
   let dp = Array.from(new Array(len), i => new Array(len).fill(0))
   let max = 0
   for(let i = len -1; i >= 0; i --) {
-      for(let j = i; j < len -1 ; j ++) {
-          if ((j - i < 1) dp[j][i] = true
+      for(let j = i; j < len ; j ++) {
+          if (j - i < 1) dp[j][i] = true
           else {
-              console.log(j +1, i -1)
-              dp[j][i] = dp[j + 1][i -1] && nums[j] < nums[j + 1] && nums[i] > nums[i-1]
+              dp[i][j] = dp[i + 1][j -1] && nums[i] < nums[i + 1] && nums[j] > nums[j-1]
           }
-          console.log(dp[j][i], j, i, nums[j], nums[i])
-          if (dp[j][i]) {
+          if (dp[i][j]) {
               max = Math.max(max, i - j + 1)
           }
       }
