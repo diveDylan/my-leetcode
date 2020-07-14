@@ -7,6 +7,16 @@
  * @param {number[]} nums
  * @return {number}
  * @type error in mind
+ * -2 max
+ * 1 -1 1 max
+ * -3 -2 1 max
+ * 4 2 4 max
+ * -1 3 4 max
+ * 2 5 5 max
+ * 1 6 6 max
+ * -5 1 6 max
+ * 4 5 6 nax
+ * 
  */
 var maxSubArray = function(nums) {
     let pre = 0, max = nums[0]
