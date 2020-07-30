@@ -2,24 +2,25 @@
  * @param {number[]} nums
  * @return {number}
  */
-var lengthOfLIS = function(nums) {
-  const len = nums.length
-  if (len < 1) return len
-  let dp = Array.from(new Array(len), i => new Array(len).fill(0))
-  let max = 0
-  for(let i = len -1; i >= 0; i --) {
-      for(let j = i; j < len ; j ++) {
-          if (j - i < 1) dp[j][i] = true
-          else {
-              dp[i][j] = dp[i + 1][j -1] && nums[i] < nums[i + 1] && nums[j] > nums[j-1]
-          }
-          if (dp[i][j]) {
-              max = Math.max(max, i - j + 1)
-          }
+var maximalSquare = function(matrix) {
+    const len = matrix.length
+    if (!len) return 0
+    const innerLen = matrix[0].length
+    if (!innerLen) return 0
+    let dp = Array.from(new Array(len), i => new Array(innerLen).fill(0))
+    let max = 0
+    for(let i = 0; i < len; i ++) {
+      for(let j = 0; j < innerLen; j ++) {
+        if (j === 0 || i === 0) {
+          dp[i][j] = matrix[i][j]
+        } else {
+          dp[i][j] = matrix[i][j] === '1' ? Math.min(dp[i -1][j], dp[i-1][j -1], dp[i][j-1]) + 1 : 0
+        }
+        max = Math.max(max, dp[i][j])
       }
-  }
-  return max
-};
+    }
+    return max * max
+  };
 /**
  * @thought
  * [list] <s> --- <e>
