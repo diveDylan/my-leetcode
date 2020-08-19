@@ -8,6 +8,7 @@
   此时，桌子上的牌顺序为： (牌底) 1,2,3,4,5,6,7,8,9,10,11,12,13 (牌顶)。
 
   问：原来魔术师手上牌的顺序，用函数实现。
+
  */
 /**
  * 
@@ -16,7 +17,6 @@
 function orderPoke(result) {
   const arr = new Array(result.length).fill(1).map((i, index) => index)
   const len = result.length
-  let left = 0
   for(var i = 0; i < arr.length; i++) {
     if (i % 2 === 0 || i === arr.length -1) arr[arr[i]] = result.shift()
     else {
@@ -26,6 +26,8 @@ function orderPoke(result) {
   return arr.slice(0, len)
   
 }
+
+orderPoke([1,2,3,4,5,6,7,8,9,10,11,12,13 ])
 
 /**
  * top: 1
