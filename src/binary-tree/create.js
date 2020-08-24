@@ -65,3 +65,46 @@ function createByDirection(direction) {
   }
   return arr
 }
+
+// 链表方式实现一个树 左右指针和value
+class ListNode {
+  constructor(val, left = null, right = null) {
+    this.val = val
+    this.left = left 
+    this.right = right
+  }
+}
+
+function createFullTree(tree) {
+  const treeNode = tree ||  ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 
+  'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z']
+  const head = new ListNode(treeNode[0])
+  let next = 0
+  function addNode(arr ) {
+    let nextArr = []
+    arr.forEach( item => {
+    
+      item.left = new ListNode(treeNode[++next])
+      item.right = new ListNode(treeNode[++next])
+      item.left.val ? nextArr.push(item.left) : item.left = null
+      item.right.val ? nextArr.push(item.right) : item.right = null
+    })
+    if (next <treeNode.length) {
+      addNode(nextArr)
+    }
+    
+  }
+
+  addNode([head])
+  return head
+}
+
+
+// 先序遍历
+function preOrder(tree) {
+  if(tree === null) return;
+  console.log(tree.val)
+  preOrder(tree.left)
+  preOrder(tree.right)
+
+}
